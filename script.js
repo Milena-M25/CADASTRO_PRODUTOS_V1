@@ -86,6 +86,35 @@ class Produto{
 const listaDeProdutos = [];
 
 //=======================================================================================
+//FASE 2.1: Persistência com localStorage
+// definir uma constante para evitar erros de digitacão
+// ao usarmos a chave de localStorage
+//=======================================================================================
+
+const CHAVE_STORAGE ="sistema_estoque_produtos";
+
+//1. função para Salvar dados no navegador
+function salvarNolocalStorage(){
+const listaEmTexto = JSON.stringify(listaDeProdutos);
+    localStorage.setItem(CHAVE_STORAGE, listaEmTexto)
+}
+
+//2. função Carregar os dados salvos quando a página abre
+function carregarDoLocalStorage(){
+    const dadosSalvos =localStorage.getItem(CHAVE_STORAGE)
+
+    if(dadosSalvos){
+        //converte a string JSON de volta para um array
+        //de objetos genéricos
+        const produtosObjetos =JSON.parse(dadosSalvos);
+        //reinstanciar cada produto como um new Produto
+        produtosObjetos.forEach((prod)=>{
+            const produtoInstanciado = new Produto(prod.nome,prod.preco,prod.quantidade);
+            listaDeProdutos.push(produtoInstanciado);
+        });
+    }
+}
+//=======================================================================================
 //FASE 3: Escuta de Eventos do DOM
 //=======================================================================================
 
