@@ -1,56 +1,210 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Estoque - POO</title>
+
+    <title>Sistema de Estoque | Estilo Japonês</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Cadastro de Produtos</h1>
+    <div class="fundo-escuro"></div>
 
-        <img src="imagem.jpg">
-        <!--Formulário de Entrada-->
-        <form id="produto-form">
-            <div class="form-group">
-                <label for="nome">Nome do Produto:</label>
-                <input type="text" id="nome" placeholder="Ex. Notebook" required />
+    <main class="container">
+        <header class="cabecalho">
+            <div class="marca">
+                <span class="simbolo">和</span>
+
+                <div>
+                    <p class="subtitulo">CONTROLE E ORGANIZAÇÃO</p>
+                    <h1>Sistema de Estoque</h1>
+                    <p class="descricao-cabecalho">
+                        Simplicidade, precisão e equilíbrio.
+                    </p>
+                </div>
             </div>
 
-                <div class="form-group">
-                    <label for="preco">Preço (R$:)</label>
-                    <input type="number" id="preco" step="0.01" placeholder="Ex. 3500.00" required />
+            <span class="etiqueta-status">
+                <span class="bolinha"></span>
+                Estoque local
+            </span>
+        </header>
+
+        <section class="banner">
+            <div class="banner-texto">
+                <span class="etiqueta">GESTÃO DE PRODUTOS</span>
+
+                <h2>Organize seu estoque com tranquilidade.</h2>
+
+                <p>
+                    Cadastre produtos, acompanhe os valores e mantenha
+                    seus registros sempre organizados.
+                </p>
             </div>
 
-            <div class="form-group">
-                    <label for="quantidade">Quantidade:</label>
-                    <input type="number" id="quantidade" placeholder="Ex. 5" required />
+            <div class="banner-imagem">
+                <img
+                    src="imagens2.jpg"
+                    alt="Paisagem japonesa em pixel art com um gato samurai"
+                    class="imagem-principal"
+                >
             </div>
-            <button type="submit" class="btn-primary"> Adicionar Produto</button>
-        </form>
+        </section>
 
-        <!--Cabeçalho de Ações e Resumo-->
-        <div class="resumo-container">
-            <h3 id="total-estoque">Total em Estoque: R$0,00</h3>
-            <button id="limpar-tabela" class="btn-danger">Limpar Tudo</button>
-        </div>
+        <section class="resumo">
+            <div class="cartao-resumo">
+                <div class="icone-resumo">箱</div>
 
-        <!--Tabela de Exibição-->
-        <table id="tabela-produtos">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Preço Un.</th>
-                    <th>Qtd</th>
-                    <th>Subtotal</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--As linha da tabela serão inserida pelo Js-->
-            </tbody>
-        </table>
+                <div>
+                    <p class="rotulo-resumo">Produtos cadastrados</p>
+                    <h2 id="quantidade-produtos">0</h2>
+                </div>
+            </div>
+
+            <div class="cartao-resumo cartao-total">
+                <div class="icone-resumo">￥</div>
+
+                <div>
+                    <p class="rotulo-resumo">Valor total do estoque</p>
+                    <h2 id="total-estoque">R$ 0,00</h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="painel">
+            <div class="titulo-secao">
+                <div>
+                    <span class="etiqueta">GERENCIAMENTO</span>
+                    <h2>Cadastro de produtos</h2>
+                    <p>Preencha os campos para adicionar ou editar um produto.</p>
+                </div>
+            </div>
+
+            <form id="produto-form" novalidate>
+                <div class="campos-formulario">
+                    <div class="campo campo-nome">
+                        <label for="nome">Nome do produto</label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            placeholder="Ex.: Caderno"
+                            maxlength="100"
+                            autocomplete="off"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="preco">Preço unitário (R$)</label>
+
+                        <input
+                            type="number"
+                            id="preco"
+                            placeholder="Ex.: 15,90"
+                            min="0.01"
+                            step="0.01"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="quantidade">Quantidade</label>
+
+                        <input
+                            type="number"
+                            id="quantidade"
+                            placeholder="Ex.: 10"
+                            min="1"
+                            step="1"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="acoes-formulario">
+                    <button
+                        type="submit"
+                        id="botao-enviar"
+                        class="botao-principal"
+                    >
+                        <span>＋</span>
+                        Adicionar Produto
+                    </button>
+
+                    <button
+                        type="button"
+                        id="botao-cancelar"
+                        class="botao-secundario"
+                        hidden
+                    >
+                        Cancelar edição
+                    </button>
+                </div>
+
+                <p class="aviso-formulario">
+                    Os campos são obrigatórios. O preço e a quantidade
+                    precisam ser maiores que zero.
+                </p>
+            </form>
+        </section>
+
+        <section class="painel painel-tabela">
+            <div class="cabecalho-tabela">
+                <div>
+                    <span class="etiqueta">SEUS REGISTROS</span>
+                    <h2>Produtos em estoque</h2>
+                    <p>Consulte, edite ou remova seus produtos.</p>
+                </div>
+
+                <button
+                    type="button"
+                    id="limpar-tabela"
+                    class="botao-limpar"
+                >
+                    Limpar estoque
+                </button>
+            </div>
+
+            <div class="tabela-responsiva">
+                <table id="tabela-produtos">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço unitário</th>
+                            <th>Quantidade</th>
+                            <th>Subtotal</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <p id="mensagem-vazia" class="mensagem-vazia">
+                Ainda não há produtos cadastrados. Adicione o primeiro
+                produto usando o formulário acima.
+            </p>
+
+            <div class="rodape-tabela">
+                <span id="contador-produtos">0 produtos cadastrados</span>
+                <span>Seus registros são salvos neste navegador.</span>
+            </div>
+        </section>
+
+        <footer class="rodape">
+            <span>和 — Organização e equilíbrio</span>
+            <span>Sistema de Estoque</span>
+        </footer>
+    </main>
+
+    <div class="avatar-usuario" title="Usuário">
+        <img src="Foto minha.png" alt="Foto do usuário">
+        <span class="indicador-avatar"></span>
     </div>
 
     <script src="script.js"></script>
