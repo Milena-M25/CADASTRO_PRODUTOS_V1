@@ -280,13 +280,15 @@ button {
     min-width: 0;
 }
 
-.campo label {
+.campo label,
+.campo-busca label {
     color: var(--texto);
     font-size: 12px;
     font-weight: 600;
 }
 
-.campo input {
+.campo input,
+.campo-busca input {
     width: 100%;
     min-width: 0;
     padding: 13px 14px;
@@ -298,11 +300,13 @@ button {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.campo input::placeholder {
+.campo input::placeholder,
+.campo-busca input::placeholder {
     color: #877d6f;
 }
 
-.campo input:focus {
+.campo input:focus,
+.campo-busca input:focus {
     border-color: var(--bege);
     box-shadow: 0 0 0 3px rgba(198, 173, 134, 0.12);
 }
@@ -382,6 +386,25 @@ button {
     background: rgba(167, 71, 56, 0.23);
 }
 
+/* CAMPO DE BUSCA V4 */
+
+.campo-busca {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 20px;
+}
+
+.campo-busca input {
+    padding: 14px 16px;
+    font-size: 13px;
+}
+
+.campo-busca input:focus {
+    border-color: var(--bege);
+    box-shadow: 0 0 0 3px rgba(198, 173, 134, 0.12);
+}
+
 .tabela-responsiva {
     width: 100%;
     overflow-x: auto;
@@ -430,7 +453,8 @@ button {
     white-space: nowrap;
 }
 
-/* Área dos botões Editar e Remover */
+/* BOTÕES DE AÇÃO */
+
 .acoes-produto {
     display: flex;
     align-items: center;

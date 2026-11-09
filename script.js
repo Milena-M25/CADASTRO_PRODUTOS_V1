@@ -3,10 +3,12 @@
 // ==========================================
 
 class Produto {
+
     #preco;
     #quantidade;
 
     constructor(nome, preco, quantidade) {
+
         nome = String(nome).trim();
 
         if (nome === "") {
@@ -16,6 +18,7 @@ class Produto {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
+
     }
 
     get preco() {
@@ -23,15 +26,15 @@ class Produto {
     }
 
     set preco(novoPreco) {
+
         novoPreco = Number(novoPreco);
 
         if (!Number.isFinite(novoPreco) || novoPreco <= 0) {
-            throw new Error(
-                "O preço deve ser um número maior que zero."
-            );
+            throw new Error("O preço deve ser um número maior que zero.");
         }
 
         this.#preco = novoPreco;
+
     }
 
     get quantidade() {
@@ -39,6 +42,7 @@ class Produto {
     }
 
     set quantidade(novaQuantidade) {
+
         novaQuantidade = Number(novaQuantidade);
 
         if (
@@ -51,11 +55,13 @@ class Produto {
         }
 
         this.#quantidade = novaQuantidade;
+
     }
 
     calcularSubtotal() {
         return this.preco * this.quantidade;
     }
+
 }
 
 
@@ -64,6 +70,7 @@ class Produto {
 // ==========================================
 
 const listaDeProdutos = [];
+
 const CHAVE_STORAGE = "sistema_estoque_produtos";
 
 let indiceEdicao = null;
@@ -74,18 +81,27 @@ let indiceEdicao = null;
 // ==========================================
 
 const formProduto = document.getElementById("produto-form");
+
 const campoNome = document.getElementById("nome");
+
 const campoPreco = document.getElementById("preco");
+
 const campoQuantidade = document.getElementById("quantidade");
 
+const campoBusca = document.getElementById("campo-busca");
+
 const btnLimparTudo = document.getElementById("limpar-tabela");
+
 const totalEstoqueEl = document.getElementById("total-estoque");
+
 const quantidadeProdutosEl = document.getElementById(
     "quantidade-produtos"
 );
+
 const contadorProdutosEl = document.getElementById(
     "contador-produtos"
 );
+
 const mensagemVazia = document.getElementById("mensagem-vazia");
 
 const tabelaBody = document.querySelector(
@@ -93,6 +109,7 @@ const tabelaBody = document.querySelector(
 );
 
 const botaoEnviar = document.getElementById("botao-enviar");
+
 const botaoCancelar = document.getElementById("botao-cancelar");
 
 
@@ -101,10 +118,12 @@ const botaoCancelar = document.getElementById("botao-cancelar");
 // ==========================================
 
 function formatarMoeda(valor) {
+
     return valor.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
     });
+
 }
 
 
@@ -113,28 +132,36 @@ function formatarMoeda(valor) {
 // ==========================================
 
 function salvarNoLocalStorage() {
+
     const produtosParaSalvar = listaDeProdutos.map(
         function (produto) {
+
             return {
                 nome: produto.nome,
                 preco: produto.preco,
                 quantidade: produto.quantidade
             };
+
         }
     );
 
     try {
+
         localStorage.setItem(
             CHAVE_STORAGE,
             JSON.stringify(produtosParaSalvar)
         );
+
     } catch (erro) {
+
         alert(
             "Não foi possível salvar os produtos neste navegador."
         );
 
         console.error("Erro ao salvar produtos:", erro);
+
     }
+
 }
 
 
@@ -143,6 +170,7 @@ function salvarNoLocalStorage() {
 // ==========================================
 
 function carregarDoLocalStorage() {
+
     const dadosSalvos = localStorage.getItem(CHAVE_STORAGE);
 
     if (!dadosSalvos) {
@@ -150,6 +178,7 @@ function carregarDoLocalStorage() {
     }
 
     try {
+
         const produtosSalvos = JSON.parse(dadosSalvos);
 
         if (!Array.isArray(produtosSalvos)) {
@@ -157,7 +186,9 @@ function carregarDoLocalStorage() {
         }
 
         produtosSalvos.forEach(function (dados) {
+
             try {
+
                 const produto = new Produto(
                     dados.nome,
                     dados.preco,
@@ -165,16 +196,24 @@ function carregarDoLocalStorage() {
                 );
 
                 listaDeProdutos.push(produto);
+
             } catch (erro) {
+
                 console.warn(
                     "Produto inválido ignorado:",
                     erro.message
                 );
+
             }
+
         });
+
     } catch (erro) {
+
         console.error("Erro ao carregar produtos:", erro);
+
     }
+
 }
 
 
@@ -183,13 +222,21 @@ function carregarDoLocalStorage() {
 // ==========================================
 
 function atualizarBotaoFormulario() {
+
     if (indiceEdicao === null) {
+
         botaoEnviar.innerHTML = "<span>＋</span> Adicionar Produto";
+
         botaoCancelar.hidden = true;
+
     } else {
+
         botaoEnviar.textContent = "Salvar Alterações";
+
         botaoCancelar.hidden = false;
+
     }
+
 }
 
 
@@ -198,21 +245,27 @@ function atualizarBotaoFormulario() {
 // ==========================================
 
 formProduto.addEventListener("submit", function (event) {
+
     event.preventDefault();
 
-    // Validação do nome
+    // Validar o nome
 
     const nome = campoNome.value.trim();
 
     if (nome === "") {
+
         alert("Por favor, informe o nome do produto.");
+
         campoNome.focus();
+
         return;
+
     }
 
-    // Validação do preço
+    // Validar o preço
 
     const textoPreco = campoPreco.value.trim();
+
     const preco = Number(textoPreco);
 
     if (
@@ -220,14 +273,19 @@ formProduto.addEventListener("submit", function (event) {
         !Number.isFinite(preco) ||
         preco <= 0
     ) {
+
         alert("O preço deve ser um número maior que zero.");
+
         campoPreco.focus();
+
         return;
+
     }
 
-    // Validação da quantidade
+    // Validar a quantidade
 
     const textoQuantidade = campoQuantidade.value.trim();
+
     const quantidade = Number(textoQuantidade);
 
     if (
@@ -235,12 +293,15 @@ formProduto.addEventListener("submit", function (event) {
         !Number.isInteger(quantidade) ||
         quantidade <= 0
     ) {
+
         alert(
             "A quantidade deve ser um número inteiro maior que zero."
         );
 
         campoQuantidade.focus();
+
         return;
+
     }
 
     // Criar o novo produto
@@ -248,35 +309,47 @@ formProduto.addEventListener("submit", function (event) {
     let novoProduto;
 
     try {
+
         novoProduto = new Produto(
             nome,
             preco,
             quantidade
         );
+
     } catch (erro) {
+
         alert(erro.message);
+
         return;
+
     }
 
-    // Inclusão ou atualização
+    // Adicionar ou atualizar o produto
 
     if (indiceEdicao === null) {
+
         listaDeProdutos.push(novoProduto);
+
     } else {
+
         listaDeProdutos[indiceEdicao] = novoProduto;
+
     }
 
     // Salvar as alterações
 
     salvarNoLocalStorage();
 
-    // Limpar o formulário e restaurar o estado
+    // Limpar o formulário
 
     formProduto.reset();
+
     indiceEdicao = null;
 
     atualizarBotaoFormulario();
+
     atualizarInterface();
+
 });
 
 
@@ -285,15 +358,21 @@ formProduto.addEventListener("submit", function (event) {
 // ==========================================
 
 function prepararEdicao(index) {
+
     const produto = listaDeProdutos[index];
 
     if (!produto) {
+
         alert("Este produto não foi encontrado.");
+
         return;
+
     }
 
     campoNome.value = produto.nome;
+
     campoPreco.value = produto.preco;
+
     campoQuantidade.value = produto.quantidade;
 
     indiceEdicao = index;
@@ -306,6 +385,7 @@ function prepararEdicao(index) {
     });
 
     campoNome.focus();
+
 }
 
 
@@ -314,11 +394,13 @@ function prepararEdicao(index) {
 // ==========================================
 
 function cancelarEdicao() {
+
     formProduto.reset();
 
     indiceEdicao = null;
 
     atualizarBotaoFormulario();
+
 }
 
 botaoCancelar.addEventListener("click", cancelarEdicao);
@@ -329,22 +411,29 @@ botaoCancelar.addEventListener("click", cancelarEdicao);
 // ==========================================
 
 function removerProduto(index) {
+
     if (
         indiceEdicao !== null &&
         indiceEdicao === index
     ) {
+
         cancelarEdicao();
+
     } else if (
         indiceEdicao !== null &&
         indiceEdicao > index
     ) {
+
         indiceEdicao--;
+
     }
 
     listaDeProdutos.splice(index, 1);
 
     salvarNoLocalStorage();
+
     atualizarInterface();
+
 }
 
 
@@ -353,9 +442,13 @@ function removerProduto(index) {
 // ==========================================
 
 btnLimparTudo.addEventListener("click", function () {
+
     if (listaDeProdutos.length === 0) {
+
         alert("O estoque já está vazio.");
+
         return;
+
     }
 
     const confirmar = confirm(
@@ -370,73 +463,139 @@ btnLimparTudo.addEventListener("click", function () {
 
     localStorage.removeItem(CHAVE_STORAGE);
 
+    campoBusca.value = "";
+
     cancelarEdicao();
+
     atualizarInterface();
+
 });
 
 
 // ==========================================
-// FASE 13: ATUALIZAR O TOTAL DO ESTOQUE
+// FASE 13: BUSCA DINÂMICA COM FILTER
 // ==========================================
 
-function atualizarTotalEstoque() {
-    const total = listaDeProdutos.reduce(
+function obterProdutosFiltrados() {
+
+    const termoBusca = campoBusca.value
+        .trim()
+        .toLowerCase();
+
+    return listaDeProdutos.filter(function (produto) {
+
+        return produto.nome
+            .toLowerCase()
+            .includes(termoBusca);
+
+    });
+
+}
+
+
+// ==========================================
+// FASE 14: TOTAL DO ESTOQUE COM REDUCE
+// ==========================================
+
+function atualizarTotalEstoque(produtosVisiveis) {
+
+    const total = produtosVisiveis.reduce(
         function (acumulador, produto) {
+
             return acumulador + produto.calcularSubtotal();
+
         },
         0
     );
 
     totalEstoqueEl.textContent = formatarMoeda(total);
+
 }
 
 
 // ==========================================
-// FASE 14: ATUALIZAR OS CONTADORES
+// FASE 15: ATUALIZAR OS CONTADORES
 // ==========================================
 
-function atualizarContadores() {
-    const quantidade = listaDeProdutos.length;
+function atualizarContadores(produtosVisiveis) {
+
+    const quantidade = produtosVisiveis.length;
 
     quantidadeProdutosEl.textContent = quantidade;
 
     contadorProdutosEl.textContent =
         quantidade === 1
-            ? "1 produto cadastrado"
-            : quantidade + " produtos cadastrados";
+            ? "1 produto encontrado"
+            : quantidade + " produtos encontrados";
 
-    mensagemVazia.hidden = quantidade !== 0;
 }
 
 
 // ==========================================
-// FASE 15: RENDERIZAR A TABELA
+// FASE 16: MENSAGENS DA TABELA
 // ==========================================
 
-function renderizarTabela() {
+function atualizarMensagemVazia(produtosVisiveis) {
+
+    if (listaDeProdutos.length === 0) {
+
+        mensagemVazia.textContent =
+            "Ainda não há produtos cadastrados. Adicione o primeiro produto usando o formulário acima.";
+
+        mensagemVazia.hidden = false;
+
+    } else if (produtosVisiveis.length === 0) {
+
+        mensagemVazia.textContent =
+            "Nenhum produto foi encontrado. Tente pesquisar outro nome.";
+
+        mensagemVazia.hidden = false;
+
+    } else {
+
+        mensagemVazia.hidden = true;
+
+    }
+
+}
+
+
+// ==========================================
+// FASE 17: RENDERIZAR A TABELA
+// ==========================================
+
+function renderizarTabela(produtosVisiveis) {
+
     tabelaBody.innerHTML = "";
 
-    listaDeProdutos.forEach(function (produto, index) {
+    produtosVisiveis.forEach(function (produto) {
+
+        const index = listaDeProdutos.indexOf(produto);
+
         const linha = document.createElement("tr");
 
         // Nome do produto
 
         const colunaNome = document.createElement("td");
+
         colunaNome.textContent = produto.nome;
 
         // Preço unitário
 
         const colunaPreco = document.createElement("td");
+
         colunaPreco.textContent = formatarMoeda(produto.preco);
 
         // Quantidade
 
         const colunaQuantidade = document.createElement("td");
+
         colunaQuantidade.textContent = produto.quantidade;
 
         // Subtotal
 
         const colunaSubtotal = document.createElement("td");
+
         colunaSubtotal.textContent = formatarMoeda(
             produto.calcularSubtotal()
         );
@@ -446,6 +605,7 @@ function renderizarTabela() {
         const colunaAcoes = document.createElement("td");
 
         const grupoBotoes = document.createElement("div");
+
         grupoBotoes.className = "acoes-produto";
 
         // Botão Editar
@@ -453,11 +613,15 @@ function renderizarTabela() {
         const botaoEditar = document.createElement("button");
 
         botaoEditar.type = "button";
+
         botaoEditar.className = "btn-editar";
+
         botaoEditar.textContent = "✏️ Editar";
 
         botaoEditar.addEventListener("click", function () {
+
             prepararEdicao(index);
+
         });
 
         // Botão Remover
@@ -465,48 +629,80 @@ function renderizarTabela() {
         const botaoRemover = document.createElement("button");
 
         botaoRemover.type = "button";
+
         botaoRemover.className = "btn-remover";
+
         botaoRemover.textContent = "🗑️ Remover";
 
         botaoRemover.addEventListener("click", function () {
+
             removerProduto(index);
+
         });
 
-        // Separar os botões na tela
+        // Separar os botões
 
         grupoBotoes.appendChild(botaoEditar);
+
         grupoBotoes.appendChild(botaoRemover);
 
         colunaAcoes.appendChild(grupoBotoes);
 
-        // Montar a linha completa
+        // Montar a linha
 
         linha.appendChild(colunaNome);
+
         linha.appendChild(colunaPreco);
+
         linha.appendChild(colunaQuantidade);
+
         linha.appendChild(colunaSubtotal);
+
         linha.appendChild(colunaAcoes);
 
         tabelaBody.appendChild(linha);
+
     });
+
 }
 
 
 // ==========================================
-// FASE 16: ATUALIZAR A INTERFACE
+// FASE 18: ATUALIZAR A INTERFACE
 // ==========================================
 
 function atualizarInterface() {
-    renderizarTabela();
-    atualizarTotalEstoque();
-    atualizarContadores();
+
+    const produtosVisiveis = obterProdutosFiltrados();
+
+    renderizarTabela(produtosVisiveis);
+
+    atualizarTotalEstoque(produtosVisiveis);
+
+    atualizarContadores(produtosVisiveis);
+
+    atualizarMensagemVazia(produtosVisiveis);
+
 }
 
 
 // ==========================================
-// FASE 17: INICIAR A APLICAÇÃO
+// FASE 19: EVENTO DE DIGITAÇÃO
+// ==========================================
+
+campoBusca.addEventListener("input", function () {
+
+    atualizarInterface();
+
+});
+
+
+// ==========================================
+// FASE 20: INICIAR A APLICAÇÃO
 // ==========================================
 
 carregarDoLocalStorage();
+
 atualizarInterface();
+
 atualizarBotaoFormulario();

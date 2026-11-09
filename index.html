@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sistema de Estoque | Estilo Japonês</title>
+    <title>Sistema de Estoque</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,6 +13,7 @@
     <div class="fundo-escuro"></div>
 
     <main class="container">
+
         <header class="cabecalho">
             <div class="marca">
                 <span class="simbolo">和</span>
@@ -54,11 +55,12 @@
         </section>
 
         <section class="resumo">
+
             <div class="cartao-resumo">
                 <div class="icone-resumo">箱</div>
 
                 <div>
-                    <p class="rotulo-resumo">Produtos cadastrados</p>
+                    <p class="rotulo-resumo">Produtos encontrados</p>
                     <h2 id="quantidade-produtos">0</h2>
                 </div>
             </div>
@@ -67,13 +69,15 @@
                 <div class="icone-resumo">￥</div>
 
                 <div>
-                    <p class="rotulo-resumo">Valor total do estoque</p>
+                    <p class="rotulo-resumo">Valor total encontrado</p>
                     <h2 id="total-estoque">R$ 0,00</h2>
                 </div>
             </div>
+
         </section>
 
         <section class="painel">
+
             <div class="titulo-secao">
                 <div>
                     <span class="etiqueta">GERENCIAMENTO</span>
@@ -83,7 +87,9 @@
             </div>
 
             <form id="produto-form" novalidate>
+
                 <div class="campos-formulario">
+
                     <div class="campo campo-nome">
                         <label for="nome">Nome do produto</label>
 
@@ -122,9 +128,11 @@
                             required
                         >
                     </div>
+
                 </div>
 
                 <div class="acoes-formulario">
+
                     <button
                         type="submit"
                         id="botao-enviar"
@@ -142,16 +150,20 @@
                     >
                         Cancelar edição
                     </button>
+
                 </div>
 
                 <p class="aviso-formulario">
                     Os campos são obrigatórios. O preço e a quantidade
                     precisam ser maiores que zero.
                 </p>
+
             </form>
+
         </section>
 
         <section class="painel painel-tabela">
+
             <div class="cabecalho-tabela">
                 <div>
                     <span class="etiqueta">SEUS REGISTROS</span>
@@ -168,8 +180,23 @@
                 </button>
             </div>
 
+            <div class="campo-busca">
+
+                <label for="campo-busca">Pesquisar produtos</label>
+
+                <input
+                    type="search"
+                    id="campo-busca"
+                    placeholder="Digite o nome do produto..."
+                    autocomplete="off"
+                >
+
+            </div>
+
             <div class="tabela-responsiva">
+
                 <table id="tabela-produtos">
+
                     <thead>
                         <tr>
                             <th>Produto</th>
@@ -180,9 +207,10 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
+
                 </table>
+
             </div>
 
             <p id="mensagem-vazia" class="mensagem-vazia">
@@ -191,15 +219,17 @@
             </p>
 
             <div class="rodape-tabela">
-                <span id="contador-produtos">0 produtos cadastrados</span>
+                <span id="contador-produtos">0 produtos encontrados</span>
                 <span>Seus registros são salvos neste navegador.</span>
             </div>
+
         </section>
 
         <footer class="rodape">
             <span>和 — Organização e equilíbrio</span>
             <span>Sistema de Estoque</span>
         </footer>
+
     </main>
 
     <div class="avatar-usuario" title="Usuário">
@@ -208,5 +238,6 @@
     </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
