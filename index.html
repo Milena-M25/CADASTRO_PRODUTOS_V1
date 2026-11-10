@@ -1,119 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sistema de Estoque</title>
+    <title>Samurai Stock | Controle de Estoque</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="fundo-escuro"></div>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            <div class="logo-simbolo">侍</div>
+
+            <div>
+                <h1>SAMURAI STOCK</h1>
+                <p>武士の倉庫 — Controle de Estoque</p>
+            </div>
+        </div>
+
+        <div class="usuarios">
+
+            <div class="usuario">
+                <img src="belle.jpg" alt="Foto de Belle">
+                <span>Belle</span>
+            </div>
+
+            <div class="usuario">
+                <img src="minha.jpg" alt="Foto de Milena">
+                <span>Milena</span>
+            </div>
+
+        </div>
+
+        <button id="botao-bootstrap" class="botao-bootstrap" type="button">
+            <span>✧</span> Conceito Bootstrap
+        </button>
+
+    </header>
+
 
     <main class="container">
 
-        <header class="cabecalho">
-            <div class="marca">
-                <span class="simbolo">和</span>
-
-                <div>
-                    <p class="subtitulo">CONTROLE E ORGANIZAÇÃO</p>
-                    <h1>Sistema de Estoque</h1>
-                    <p class="descricao-cabecalho">
-                        Simplicidade, precisão e equilíbrio.
-                    </p>
-                </div>
-            </div>
-
-            <span class="etiqueta-status">
-                <span class="bolinha"></span>
-                Estoque local
-            </span>
-        </header>
-
         <section class="banner">
-            <div class="banner-texto">
-                <span class="etiqueta">GESTÃO DE PRODUTOS</span>
 
-                <h2>Organize seu estoque com tranquilidade.</h2>
+            <div class="banner-conteudo">
+
+                <span class="banner-etiqueta">
+                    DISCIPLINA • HONRA • ORGANIZAÇÃO
+                </span>
+
+                <h2>O caminho do<br>Samurai.</h2>
 
                 <p>
-                    Cadastre produtos, acompanhe os valores e mantenha
-                    seus registros sempre organizados.
+                    Gerencie seus produtos com precisão,
+                    estratégia e disciplina.
                 </p>
+
+                <div class="linha-decorativa"></div>
+
             </div>
 
-            <div class="banner-imagem">
-                <img
-                    src="imagens2.jpg"
-                    alt="Paisagem japonesa em pixel art com um gato samurai"
-                    class="imagem-principal"
-                >
-            </div>
+            <div class="banner-kanji">武士</div>
+
         </section>
+
 
         <section class="resumo">
 
-            <div class="cartao-resumo">
-                <div class="icone-resumo">箱</div>
+            <article class="card-resumo">
+                <div class="card-icone">刀</div>
 
                 <div>
-                    <p class="rotulo-resumo">Produtos encontrados</p>
-                    <h2 id="quantidade-produtos">0</h2>
+                    <span>Produtos cadastrados</span>
+                    <strong id="contador-produtos">0</strong>
                 </div>
-            </div>
+            </article>
 
-            <div class="cartao-resumo cartao-total">
-                <div class="icone-resumo">￥</div>
+            <article class="card-resumo">
+                <div class="card-icone">金</div>
 
                 <div>
-                    <p class="rotulo-resumo">Valor total encontrado</p>
-                    <h2 id="total-estoque">R$ 0,00</h2>
+                    <span>Valor total do estoque</span>
+                    <strong id="valor-total">R$ 0,00</strong>
                 </div>
-            </div>
+            </article>
 
         </section>
+
 
         <section class="painel">
 
             <div class="titulo-secao">
-                <div>
-                    <span class="etiqueta">GERENCIAMENTO</span>
-                    <h2>Cadastro de produtos</h2>
-                    <p>Preencha os campos para adicionar ou editar um produto.</p>
-                </div>
+                <span class="etiqueta">01 — REGISTRO</span>
+
+                <h2>Adicionar produto</h2>
+
+                <p>
+                    Cada produto merece um registro organizado.
+                </p>
             </div>
 
             <form id="produto-form" novalidate>
 
+                <div id="mensagem-erro"
+                    class="mensagem-erro"
+                    role="alert"
+                    aria-live="polite"
+                    hidden>
+                </div>
+
                 <div class="campos-formulario">
 
-                    <div class="campo campo-nome">
+                    <div class="campo">
                         <label for="nome">Nome do produto</label>
 
                         <input
                             type="text"
                             id="nome"
-                            placeholder="Ex.: Caderno"
-                            maxlength="100"
-                            autocomplete="off"
-                            required
-                        >
+                            placeholder="Ex: Camiseta"
+                            maxlength="50">
                     </div>
 
                     <div class="campo">
-                        <label for="preco">Preço unitário (R$)</label>
+                        <label for="preco">Preço unitário</label>
 
                         <input
                             type="number"
                             id="preco"
-                            placeholder="Ex.: 15,90"
+                            placeholder="Ex: 29.90"
                             min="0.01"
-                            step="0.01"
-                            required
-                        >
+                            step="0.01">
                     </div>
 
                     <div class="campo">
@@ -122,80 +149,66 @@
                         <input
                             type="number"
                             id="quantidade"
-                            placeholder="Ex.: 10"
+                            placeholder="Ex: 10"
                             min="1"
-                            step="1"
-                            required
-                        >
+                            step="1">
                     </div>
 
                 </div>
 
                 <div class="acoes-formulario">
 
-                    <button
-                        type="submit"
-                        id="botao-enviar"
-                        class="botao-principal"
-                    >
-                        <span>＋</span>
-                        Adicionar Produto
+                    <button type="submit" id="botao-salvar" class="botao-principal">
+                        ⚔ Cadastrar produto
                     </button>
 
                     <button
                         type="button"
-                        id="botao-cancelar"
+                        id="botao-cancelar-edicao"
                         class="botao-secundario"
-                        hidden
-                    >
+                        hidden>
                         Cancelar edição
                     </button>
 
                 </div>
 
-                <p class="aviso-formulario">
-                    Os campos são obrigatórios. O preço e a quantidade
-                    precisam ser maiores que zero.
-                </p>
-
             </form>
 
         </section>
 
-        <section class="painel painel-tabela">
 
-            <div class="cabecalho-tabela">
-                <div>
-                    <span class="etiqueta">SEUS REGISTROS</span>
-                    <h2>Produtos em estoque</h2>
-                    <p>Consulte, edite ou remova seus produtos.</p>
-                </div>
+        <section class="painel">
 
-                <button
-                    type="button"
-                    id="limpar-tabela"
-                    class="botao-limpar"
-                >
-                    Limpar estoque
-                </button>
+            <div class="titulo-secao">
+                <span class="etiqueta">02 — ARSENAL</span>
+
+                <h2>Produtos cadastrados</h2>
+
+                <p>
+                    Consulte e administre todos os itens do seu estoque.
+                </p>
             </div>
 
-            <div class="campo-busca">
-
-                <label for="campo-busca">Pesquisar produtos</label>
+            <div class="barra-acoes">
 
                 <input
                     type="search"
                     id="campo-busca"
-                    placeholder="Digite o nome do produto..."
-                    autocomplete="off"
-                >
+                    placeholder="⌕ Pesquisar produto..."
+                    aria-label="Pesquisar produto">
+
+                <button
+                    type="button"
+                    id="limpar-tabela"
+                    class="botao-excluir-todos">
+                    Limpar estoque
+                </button>
 
             </div>
 
-            <div class="tabela-responsiva">
+            <div class="tabela-container">
 
-                <table id="tabela-produtos">
+                <table>
 
                     <thead>
                         <tr>
@@ -207,37 +220,229 @@
                         </tr>
                     </thead>
 
-                    <tbody></tbody>
+                    <tbody id="tabela-produtos"></tbody>
 
                 </table>
 
-            </div>
+                <p id="mensagem-vazia" class="mensagem-vazia">
+                    Nenhum produto cadastrado.
+                </p>
 
-            <p id="mensagem-vazia" class="mensagem-vazia">
-                Ainda não há produtos cadastrados. Adicione o primeiro
-                produto usando o formulário acima.
-            </p>
-
-            <div class="rodape-tabela">
-                <span id="contador-produtos">0 produtos encontrados</span>
-                <span>Seus registros são salvos neste navegador.</span>
             </div>
 
         </section>
 
-        <footer class="rodape">
-            <span>和 — Organização e equilíbrio</span>
-            <span>Sistema de Estoque</span>
-        </footer>
-
     </main>
 
-    <div class="avatar-usuario" title="Usuário">
-        <img src="Foto minha.png" alt="Foto do usuário">
-        <span class="indicador-avatar"></span>
+
+    <footer class="rodape">
+
+        <div>
+            <h3>侍 SAMURAI STOCK</h3>
+            <p>A disciplina é a base de toda grande conquista.</p>
+        </div>
+
+        <span>Projeto escolar • Versão 5.0</span>
+
+    </footer>
+
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+
+    <div id="modal-confirmacao" class="modal-overlay" hidden>
+
+        <section
+            class="modal-conteudo modal-confirmacao-conteudo"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal">
+
+            <button type="button" class="modal-fechar" id="fechar-modal">
+                ×
+            </button>
+
+            <div class="modal-simbolo">⚔</div>
+
+            <span class="etiqueta">DECISÃO DO SAMURAI</span>
+
+            <h2 id="titulo-modal">Confirmar ação</h2>
+
+            <p id="texto-modal">
+                Deseja realmente continuar?
+            </p>
+
+            <div class="modal-acoes">
+
+                <button type="button" id="cancelar-modal" class="botao-modal-cancelar">
+                    Cancelar
+                </button>
+
+                <button type="button" id="confirmar-modal" class="botao-modal-confirmar">
+                    Confirmar
+                </button>
+
+            </div>
+
+        </section>
+
     </div>
+
+
+    <!-- MODAL CONCEITO BOOTSTRAP -->
+
+    <div id="modal-bootstrap" class="modal-overlay" hidden>
+
+        <section
+            class="modal-conteudo modal-bootstrap-conteudo"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-bootstrap">
+
+            <button
+                type="button"
+                class="modal-fechar"
+                id="fechar-bootstrap"
+                aria-label="Fechar">
+                ×
+            </button>
+
+            <div class="bootstrap-cabecalho">
+
+                <div class="bootstrap-icone">
+                    <span>✧</span>
+                </div>
+
+                <span class="bootstrap-etiqueta">
+                    TECNOLOGIA & DESENVOLVIMENTO
+                </span>
+
+                <h2 id="titulo-bootstrap">
+                    Conceito Bootstrap
+                </h2>
+
+                <p>
+                    Mais praticidade, organização e agilidade
+                    na construção de interfaces.
+                </p>
+
+            </div>
+
+
+            <div class="bootstrap-divisor"></div>
+
+
+            <div class="bootstrap-texto">
+
+                <h3>O que é Bootstrap?</h3>
+
+                <p>
+                    Bootstrap é um framework front-end que oferece
+                    componentes prontos para desenvolver sites,
+                    como botões, formulários, tabelas, menus e modais.
+                </p>
+
+                <p>
+                    Sua principal finalidade é facilitar e acelerar
+                    a criação de interfaces, além de ajudar na
+                    adaptação dos sites para diferentes dispositivos.
+                </p>
+
+            </div>
+
+
+            <div class="bootstrap-beneficios">
+
+                <article class="beneficio-card">
+                    <div class="beneficio-icone">⚡</div>
+
+                    <h4>Agilidade</h4>
+
+                    <p>
+                        Componentes prontos que economizam tempo
+                        durante o desenvolvimento.
+                    </p>
+                </article>
+
+
+                <article class="beneficio-card">
+                    <div class="beneficio-icone">▦</div>
+
+                    <h4>Organização</h4>
+
+                    <p>
+                        Estrutura que facilita a criação e
+                        manutenção das páginas.
+                    </p>
+                </article>
+
+
+                <article class="beneficio-card">
+                    <div class="beneficio-icone">◈</div>
+
+                    <h4>Responsividade</h4>
+
+                    <p>
+                        Recursos que ajudam a adaptar o site
+                        para celulares e computadores.
+                    </p>
+                </article>
+
+            </div>
+
+
+            <div class="bootstrap-aplicacao">
+
+                <span class="aplicacao-etiqueta">
+                    APLICAÇÃO NO PROJETO
+                </span>
+
+                <h3>Como poderia ser utilizado no Samurai Stock?</h3>
+
+                <p>
+                    O Bootstrap poderia acelerar a criação dos
+                    formulários, botões, tabelas e janelas modais
+                    do nosso sistema de estoque.
+                </p>
+
+                <p>
+                    Neste projeto, optamos por desenvolver a
+                    interface utilizando HTML, CSS e JavaScript
+                    personalizados, para criar uma identidade
+                    visual própria inspirada na cultura japonesa.
+                </p>
+
+            </div>
+
+
+            <div class="bootstrap-rodape">
+
+                <span>侍</span>
+
+                <p>
+                    Tecnologia com estratégia. Desenvolvimento com propósito.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="fechar-bootstrap-final"
+                class="botao-bootstrap-fechar">
+
+                Entendi, continuar explorando
+
+                <span>→</span>
+
+            </button>
+
+        </section>
+
+    </div>
+
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
